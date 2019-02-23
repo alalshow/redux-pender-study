@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as counterActions from './modules/counter';
-
+import * as postActions from './modules/post';
 
 class App extends Component {
     render() {
@@ -21,9 +21,13 @@ class App extends Component {
 
 export default connect(
     (state) => ({
-        number: state.counter
+        number: state.counter,
+        post: state.post.data,
+        loading: state.pender.pending['GET_POST'],
+        error: state.pender.failure['GET_POST']
     }),
     (dispatch) => ({
-        CounterActions: bindActionCreators(counterActions, dispatch)
+        CounterActions: bindActionCreators(counterActions, dispatch),
+        PostActions: bindActionCreators(postActions, dispatch)
     })
 )(App);
